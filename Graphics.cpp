@@ -1,11 +1,12 @@
 #include "Graphics.h"
 #include "dxerr.h"
 #include <sstream>
+#include <d3dcompiler.h>
 
 namespace wrl = Microsoft::WRL;
 
 #pragma comment(lib,"d3d11.lib")
-
+#pragma comment(lib,"D3DCompiler.lib")
 // graphics exception checking/throwing macros (some with dxgi infos)
 #define GFX_EXCEPT_NOINFO(hr) Graphics::HrException( __LINE__,__FILE__,(hr) )
 #define GFX_THROW_NOINFO(hrcall) if( FAILED( hr = (hrcall) ) ) throw Graphics::HrException( __LINE__,__FILE__,hr )
@@ -125,10 +126,21 @@ void Graphics::DrawTestTriangle()
 	sd.pSysMem = vertices;
 	GFX_THROW_INFO(pDevice->CreateBuffer(&bd, &sd, &pVertexBuffer));
 
+
 	//Bind vertex buffer to pipline
 	const UINT stride = sizeof(Vertex);
 	const UINT offset = 0u;
 	pContext->IASetVertexBuffers(0u, 1u, &pVertexBuffer, &stride, &offset);
+	
+	//Create vertex Shader
+	wrl::ComPtr<ID3D11VertexShader> pVertexShader;
+	wrl::ComPtr<ID3DBlob> pBlob;
+	GFX_THROW_INFO( D3DReadFileToBlob(L"VertexShader.cso",&pBlob));
+	GFX_THROW_INFO( pDevice->CreateVertexShader(pBlob->GetBufferPointer(),pBlob->GetBufferSize(), nullptr, &pVertexShader));
+	//Bind Vertex Shader
+	pContext->VSSetShader(pVertexShader.Get(), nullptr, 0u);
+
+
 	GFX_THROW_INFO_ONLY(pContext->Draw(3u, 0u));
 }
 
