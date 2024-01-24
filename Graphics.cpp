@@ -130,7 +130,7 @@ void Graphics::DrawTestTriangle()
 	//Bind vertex buffer to pipline
 	const UINT stride = sizeof(Vertex);
 	const UINT offset = 0u;
-	pContext->IASetVertexBuffers(0u, 1u, &pVertexBuffer, &stride, &offset);
+	pContext->IASetVertexBuffers(0u, 1u, pVertexBuffer.GetAddressOf(), &stride, &offset);
 	
 	//Create vertex Shader
 	wrl::ComPtr<ID3D11VertexShader> pVertexShader;
@@ -147,6 +147,18 @@ void Graphics::DrawTestTriangle()
 	//Bind Vertex Shader
 	pContext->PSSetShader(pPixelShader.Get(), nullptr, 0u);
 
+	//Bind Render Target
+	pContext->OMSetRenderTargets(1u,pTarget.GetAddressOf(),nullptr);
+	
+	//Configure viewport
+	D3D11_VIEWPORT vp;
+	vp.Width = 800;
+	vp.Height = 600;
+	vp.MinDepth = 0;
+	vp.MaxDepth = 0;
+	vp.TopLeftX = 0;
+	vp.TopLeftY = 0;
+	pContext->RSSetViewports(1u,&vp);
 
 	GFX_THROW_INFO_ONLY(pContext->Draw(3u, 0u));
 }
