@@ -3,8 +3,10 @@
 #include <sstream>
 #include <d3dcompiler.h>
 #include <cmath>
+#include <DirectXMath.h>
 
 namespace wrl = Microsoft::WRL;
+namespace dx = DirectX;
 
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
@@ -175,18 +177,15 @@ void Graphics::DrawTestTriangle(float angle)
 	//Create Constant Buffer for transformation matrix
 	struct ConstantBuffer
 	{
-		struct 
-		{
-			float element[4][4];
-		} transformation;
+		dx::XMMATRIX transform;
 	};
 	const ConstantBuffer cb =
 	{
 		{
-			(3.f/4.f)*std::cos(angle),      std::sin(angle), 0.f, 0.f,
-			(3.f/4.f)*-std::sin(angle),     std::cos(angle), 0.f, 0.f,
-			0.f,							0.f,             1.f, 1.f,
-			0.f,							0.f,             1.f, 1.f,
+			dx::XMMatrixTranspose(
+				dx::XMMatrixRotationZ(angle) *
+				dx::XMMatrixScaling( 3.f/4.f,1.f,1.f)
+			)
 		}
 	};
 	wrl::ComPtr<ID3D11Buffer> pConstantBuffer;
