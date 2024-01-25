@@ -100,7 +100,7 @@ void Graphics::ClearBuffer( float red,float green,float blue ) noexcept
 	pContext->ClearRenderTargetView( pTarget.Get(),color );
 }
 
-void Graphics::DrawTestTriangle(float angle)
+void Graphics::DrawTestTriangle(float angle,float x,float y)
 {
 	HRESULT hr;
 
@@ -184,7 +184,8 @@ void Graphics::DrawTestTriangle(float angle)
 		{
 			dx::XMMatrixTranspose(
 				dx::XMMatrixRotationZ(angle) *
-				dx::XMMatrixScaling( 3.f/4.f,1.f,1.f)
+				dx::XMMatrixScaling(3.f / 4.f,1.f,1.f) *
+				dx::XMMatrixTranslation(x,y,0.f)
 			)
 		}
 	};
