@@ -183,10 +183,10 @@ void Graphics::DrawTestTriangle(float angle)
 	const ConstantBuffer cb =
 	{
 		{
-			std::cos(angle),  std::sin(angle), 0.f, 0.f,
-			-std::sin(angle), std::cos(angle), 0.f, 0.f,
-			0.f,              0.f,             1.f, 1.f,
-			0.f,              0.f,             1.f, 1.f,
+			(3.f/4.f)*std::cos(angle),      std::sin(angle), 0.f, 0.f,
+			(3.f/4.f)*-std::sin(angle),     std::cos(angle), 0.f, 0.f,
+			0.f,							0.f,             1.f, 1.f,
+			0.f,							0.f,             1.f, 1.f,
 		}
 	};
 	wrl::ComPtr<ID3D11Buffer> pConstantBuffer;
