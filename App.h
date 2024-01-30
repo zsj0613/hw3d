@@ -3,6 +3,7 @@
 #include "ChiliTimer.h"
 #include "ImguiManager.h"
 #include "Camera.h"
+#include "PointLight.h"
 
 class App
 {
@@ -19,6 +20,7 @@ private:
 	ChiliTimer timer;
 	std::vector<std::unique_ptr<class Drawable>> drawables;
 	float speed_factor = 1.0f;
-	static constexpr size_t nDrawables = 180;
 	Camera cam;
+	PointLight light;
+	static constexpr size_t nDrawables = 180;
 };
