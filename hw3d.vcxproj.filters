@@ -105,6 +105,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SkinnedBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -230,6 +233,9 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SkinnedBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
@@ -241,6 +247,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Images\kappa50.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\cube.png">
       <Filter>Images</Filter>
     </Image>
   </ItemGroup>
