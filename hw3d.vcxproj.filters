@@ -16,6 +16,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{00f64fea-9918-4b25-b307-cc23635408f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Images">
+      <UniqueIdentifier>{8dc9cd1b-11db-41c1-acb1-6287320244f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -85,6 +88,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VertexShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIPlusManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Surface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -197,6 +206,12 @@
     <ClInclude Include="VertexShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GDIPlusManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Surface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
@@ -206,6 +221,9 @@
   <ItemGroup>
     <Image Include="chili.ico">
       <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\kappa50.png">
+      <Filter>Images</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
