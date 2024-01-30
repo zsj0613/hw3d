@@ -9,6 +9,7 @@
 #include "ChiliMath.h"
 #include "Surface.h"
 #include "GDIPlusManager.h"
+#include "imgui/imgui.h"
 
 GDIPlusManager gdipm;
 
@@ -78,13 +79,25 @@ App::App()
 
 void App::DoFrame()
 {
-	const auto dt = timer.Mark();
-	wnd.Gfx().ClearBuffer( 0.07f,0.0f,0.12f );
+	const auto dt = timer.Mark() * speed_factor;
+	wnd.Gfx().BeginFrame( 0.07f,0.0f,0.12f );
+
 	for( auto& d : drawables )
 	{
 		d->Update( wnd.kbd.KeyIsPressed( VK_SPACE ) ? 0.0f : dt );
 		d->Draw( wnd.Gfx() );
 	}
+
+	// imgui window to control simulation speed
+	if( ImGui::Begin( "Simulation Speed" ) )
+	{
+		ImGui::SliderFloat( "Speed Factor",&speed_factor,0.0f,4.0f );
+		ImGui::Text( "%.3f ms/frame (%.1f FPS)",1000.0f / ImGui::GetIO().Framerate,ImGui::GetIO().Framerate );
+		ImGui::Text( "Status: %s",wnd.kbd.KeyIsPressed( VK_SPACE ) ? "PAUSED" : "RUNNING" );
+	}
+	ImGui::End();
+
+	// present
 	wnd.Gfx().EndFrame();
 }
 
